@@ -16,7 +16,7 @@ public:
 
 template <class T>
 bool Cola<T>::vacio() {
-    return head == nullptr;
+    return !head;//head == nullptr;
 }
 
 template <class T>
@@ -33,34 +33,28 @@ bool Cola<T>::push(T val) {
     if (lleno()) {
         return false;
     }
-    if (vacio()) {
+    if (vacio()) 
         head = tail = arr;
-        *tail = val;
-    }
     else {
-        if (tail == arr + 9)
-            tail = arr;
-        else
-            tail++;
-        *tail = val;
+        tail++;
+        if (tail > arr + 9)
+            tail = arr;            
     }
+    *tail = val;
     return true;
 }
 
 template<class T>
 bool Cola<T>::pop(T &val) {
-    if (vacio()) {
+    if (vacio()) 
         return false;
-    }
     val = *head;
-    if (head == tail) {
+    if (head == tail) 
         head = tail = nullptr;
-    }
     else {
-        if (head == arr + 9)
-            head = arr;
-        else
-            head++;
+        head++;
+        if (head > arr + 9)
+            head = arr;            
     }
     return true;
 }
