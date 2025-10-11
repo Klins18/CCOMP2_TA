@@ -18,7 +18,7 @@ void multi(int (*A)[3][3]){
     int *p = (int*)A;
     int *q = p + tam_cara;
     int *r = q + tam_cara;
-    /*
+    /* //Multiplicacion elemento a elemento
     for(int *i = p; i < p + tam_cara; i++){
         *(r + (i - p)) = (*i) * *(q + (i - p));
     }*/
