@@ -18,9 +18,19 @@ void multi(int (*A)[3][3]){
     int *p = (int*)A;
     int *q = p + tam_cara;
     int *r = q + tam_cara;
-    
+    /*
     for(int *i = p; i < p + tam_cara; i++){
         *(r + (i - p)) = (*i) * *(q + (i - p));
+    }*/
+    for(int *i=p; i<p+tam_cara; i += col){
+        for(int *j = q; j<q + col; j++){
+            int suma = 0;
+            for(int *k =i; k < i+col;k++){
+                suma += (*k) * (*j);
+            }
+            *r = suma;
+            r++;
+        }
     }
 }
 
