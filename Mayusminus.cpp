@@ -2,37 +2,31 @@
 
 class AMayuscula {
 public:
-    bool operator()() const {
-        return true;
+    char operator()(char a) const {
+         if (a >= 'a' && a <= 'z') 
+            return a - 32;
+        return a;    
     }
 };
 
 class AMinuscula {
 public:
-    bool operator()() const {
-        return false;
+    char operator()(char a) const {
+        if (a >= 'A' && a <= 'Z') 
+            return a + 32;
+        return a;
     }
 };
 
 template <typename Functor>
 void funCad(char* c, Functor f) {
-    bool convertirMayus = f();
-    for (int i = 0; c[i] != '\0'; i++) {
-        if (convertirMayus) {
-            if (c[i] >= 'a' && c[i] <= 'z') {
-                c[i] = c[i] - 32;
-            }
-        } else {
-            if (c[i] >= 'A' && c[i] <= 'Z') {
-                c[i] = c[i] + 32;
-            }
-        }
-    }
+    for (char *i = c; *i; i++) 
+        *i = f(*i);
 }
 
 int main() {
     char cad1[] = "NamsnilK";
-    char cad2[] = "Namsnilk";
+    char cad2[] = "&%$Namsnilk";
     
     funCad(cad1, AMayuscula());
     std::cout << "Mayuscula: " << cad1 << "\n";
