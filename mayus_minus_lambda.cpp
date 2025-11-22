@@ -2,23 +2,21 @@
 
 int main() {
     auto funCad = [](char* c, auto f) {
-        auto convertirMayus = f();  
-        for (auto i = 0; c[i] != '\0'; i++) {
+        bool convertirMayus = f();  
+        for (char *i = c; *i; i++) {
             if (convertirMayus) {
-                if (c[i] >= 'a' && c[i] <= 'z') {
-                    c[i] = c[i] - 32;
-                }
+                if (*i >= 'a' && *i <= 'z') 
+                    *i = *i - 32;  
             } else {
-                if (c[i] >= 'A' && c[i] <= 'Z') {
-                    c[i] = c[i] + 32;
-                }
+                if (*i >= 'A' && *i <= 'Z') 
+                    *i = *i + 32;
             }
         }
     };
-
+    
     char cad1[] = "NamsnilK";
-    char cad2[] = "Namsnilk";
-
+    char cad2[] = "&%$Namsnilk";
+    
     funCad(cad1, [](){ return true; });
     std::cout << "Mayuscula: " << cad1 << "\n";
 
