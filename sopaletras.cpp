@@ -5,24 +5,24 @@
 
 using namespace std;
 
-int fil = 6; 
-int col = 6;
+const int fil = 7;
+const int col = 6;
 
 int main() {
     char sopa[fil][col] = {
         { 'X','G','A','T','O','X'},
         { 'Z','A','J','T','B','Z'},
         { 'N','T','O','E','I','U'},
-        { 'B','O','C','T','J','P'},
-        { 'O','T','A','B','L','M'},
-        { 'M','A','O','A','T','T'},
-        { 'S','G','G','A','S','O'}};
+        { 'O','O','C','T','J','P'},
+        { 'T','T','A','B','L','M'},
+        { 'A','A','O','T','A','G'},
+        { 'G','G','G','A','S','O'} };
 
-    string palabra[] = {"GATO"};
-    int k = sizeof(palabra) / sizeof(string); 
+    string palabra[] = { "GATO", "SAL"};
+    int k = sizeof(palabra) / sizeof(string);
 
     char* base = *sopa;
-    char* end  = base + fil * col;
+    char* end = base + fil * col;
 
 
     cout << "SOPA DE LETRAS:" << endl;
@@ -46,21 +46,21 @@ int main() {
             p += step;
         }
         return true;
-    };
+        };
 
     auto worker = [&](int dir, vector<int>& resultados) {
         for (int idx = 0; idx < k; ++idx) {
             string& w = palabra[idx];
             int count = 0;
 
-            if (dir == 0) { 
+            if (dir == 0) {
                 for (char* fila = base; fila < end; fila += col) {
                     char* rowEnd = fila + col;
                     for (char* p = fila; p < rowEnd; ++p)
                         if (buscar(w, p, rowEnd, +1)) ++count;
                 }
             }
-            else if (dir == 1) { 
+            else if (dir == 1) {
                 for (char* fila = base; fila < end; fila += col) {
                     char* rowBegin = fila;
                     for (char* p = fila + col - 1; p >= rowBegin; --p)
@@ -74,7 +74,7 @@ int main() {
                     }
                 }
             }
-            else if (dir == 3) { 
+            else if (dir == 3) {
                 for (int c = 0; c < col; ++c) {
                     for (char* p = base + (fil - 1) * col + c; p >= base; p -= col) {
                         if (buscar(w, p, base - 1, -col)) ++count;
@@ -84,7 +84,7 @@ int main() {
 
             resultados[idx] += count;
         }
-    };
+        };
 
 
     vector<thread> hilos;
